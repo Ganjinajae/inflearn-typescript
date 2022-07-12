@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "target": "ES5",
+    "outDir": "./built",
+    "moduleResolution": "Node",
+    // async await 가 ES6 문법이라 에러나는데 그걸 해결하기 위한 추가
+    "lib": ["ES2015", "DOM", "DOM.Iterable"], 
+    "noImplicitAny": true
+  },
+  "include": ["./src/**/*"] // 어떤 대상을 컴파일 할 거냐
+}

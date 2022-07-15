@@ -9,6 +9,7 @@
     "lib": ["ES2015", "DOM", "DOM.Iterable"], 
     "noImplicitAny": true,
     // "typeRoots": ["./node_modules/@types", "./types"]
+    "strict": true, // 모든 strict mode family 옵션을 활성화 => 강하게 타입을 정의할 수 있도록 도와줌
   },
   "include": ["./src/**/*"] // 어떤 대상을 컴파일 할 거냐
 }

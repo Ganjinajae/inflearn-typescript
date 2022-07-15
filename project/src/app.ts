@@ -14,8 +14,10 @@ import {
 } from './covid/index';
 
 // utils
-function $(selector: string) {
-  return document.querySelector(selector);
+function $<T extends HTMLElement = HTMLDivElement>(selector: string) {
+  // 타입 구체적으로 정의, generic 이용해서 단언하는 것보다 타입을 넘겨서 사용하는 방식으로 수정
+  const element = document.querySelector(selector);
+  return element as T;
 }
 function getUnixTimestamp(date: Date) {
   return new Date(date).getTime();
@@ -23,7 +25,9 @@ function getUnixTimestamp(date: Date) {
 
 // DOM
 // let a: Element | HTMLElement | HTMLParagraphElement;
-const confirmedTotal = $('.confirmed-total') as HTMLSpanElement;
+// const temp = $<string>('abc');
+// const temp = $('.abc');
+const confirmedTotal = $<HTMLSpanElement>('.confirmed-total');
 const deathsTotal = $('.deaths') as HTMLParagraphElement;
 const recoveredTotal = $('.recovered') as HTMLParagraphElement;
 const lastUpdatedTime = $('.last-updated-time') as HTMLParagraphElement;
@@ -225,6 +229,9 @@ async function setupData() {
 function renderChart(data: number[], labels: string[]) {
   const lineChart = $('#lineChart') as HTMLCanvasElement; // type assertion
   const ctx = lineChart.getContext('2d');
+  if (!ctx) {
+    return;
+  }
   Chart.defaults.color = '#f5eaea';
   Chart.defaults.font.family = 'Exo 2';
   new Chart(ctx, {
